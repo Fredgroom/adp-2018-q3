@@ -14,7 +14,19 @@ VALUES (
 );
 
 -- Insert an item with tags
-
+WITH inserted AS (
+    INSERT INTO items (title, imageurl, description)
+    VALUES (
+        'Example title',
+        'Example image URL',
+        'Example description'
+    )
+    RETURNING id
+)
+INSERT INTO itemtags (itemid, tagid)
+SELECT id, 1
+FROM inserted
+;
 
 
 -- Get a user with a given email
@@ -54,8 +66,9 @@ select * from tags;
 -- Get all tags for a given item (ID)
 SELECT  tags.title as Tag
 FROM    items, itemtags, tags
-WHERE   items.id = '--item id--'
+WHERE   items.id = '--item-id--'
 AND     itemtags.itemid = items.id
-AND     tags.id = itemtags.tagid;
+AND     tags.id = itemtags.tagid
+;
 
  
