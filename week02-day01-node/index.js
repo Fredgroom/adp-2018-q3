@@ -1,7 +1,7 @@
 const net = require('net');
 const server = net.createServer();
+const connections = [];
 
-const fs = require('fs');
 server.on('connection', handleConnection);
 server.listen(9000, () => {
     console.log('server listening to %j', server.address());
@@ -10,27 +10,26 @@ server.listen(9000, () => {
 function handleConnection(conn) {
     const remoteAddressAndPort = `${conn.remoteAddress}:${conn.remotePort}`;
     console.log(`new client connection from ${remoteAddressAndPort}`);
+    connections.push(conn);
 
     conn.on('data', (buffer) => {
         const textFileName = 'sample.txt';
         const data = buffer.toString();
-
-        console.log(`Received from ${remoteAddressAndPort}:`, data)
-        conn.write(`Got "${data.trim()}". Let me uppercase: "${data.trim().toUpperCase()
-            }"`)
-
-        fs.readFile(textFileName, 'utf8', (err, contents) => {
-            if (err) {
-                throw err;
-            };
-            conn.write(`\n${contents}\n`)
-        });
+        const now = new Date().toTimeString().substr(0, 8);
+        const message = `${now} Got "${data.trim()}". Let me uppercase: "${data.trim().toUpperCase()}"\n`;
+        console.log(`Received from ${remoteAddressAndPort} :`, data);
+        // conn.write(message);
+        connections
+            .filter((connection) => conn !== connection)
+            .map((connection) => {
+                connection.write(message);
+            });
     });
     conn.on('error', (error) => {
-        console.log(`And Error occurred:`, error.message())
-    });
+        console.log('An error occurred:', error.message);
+    })
     conn.on('close', () => {
         console.log(`Closed: ${remoteAddressAndPort}`);
+        connections = connections.filter((connection) => conn !== connection);
     });
 }
-
