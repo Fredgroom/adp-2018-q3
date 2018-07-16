@@ -1,6 +1,6 @@
 const net = require('net');
 const server = net.createServer();
-const connections = [];
+let connections = [];
 
 server.on('connection', handleConnection);
 server.listen(9000, () => {
@@ -9,8 +9,8 @@ server.listen(9000, () => {
 
 function handleConnection(conn) {
     const remoteAddressAndPort = `${conn.remoteAddress}:${conn.remotePort}`;
-    console.log(`new client connection from ${remoteAddressAndPort}`);
     connections.push(conn);
+    console.log(`new client connection from ${remoteAddressAndPort}; connections: ${connections.length}`);
 
     conn.on('data', (buffer) => {
         const textFileName = 'sample.txt';
