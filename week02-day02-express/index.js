@@ -23,14 +23,14 @@ app.use((request, response, next) => {
   console.log(`RECEIVED ${request.method} ${request.path}`)
   next();
 });
-
-// app.get('/', function(request, response) {
-//   response.send('hello world');
-// });
-// app.get('/quotes', function(request, response) {
-//   response.send(quotes);
-// });
 app.use(express.static('public'));
+
+app.get('/', function(request, response) {
+  response.send('hello world');
+});
+app.get('/quotes', function(request, response) {
+  response.send(quotes);
+});
 
 app.listen(port, ()=> {
   console.log(`Server running @ http://localhost:${port}`);
