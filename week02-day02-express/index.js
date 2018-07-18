@@ -37,35 +37,41 @@ app.use(diyLogger);
 
 app.use(express.static('public'));
 
-app.get('/quotes', (request, response) => {
-    response.send(quotes);
-});
-app.post('/quotes', bodyParser.json(), (request, response) => {
-  const newQuote = request.body;
-  // Add your new quote to the quotes array
-  quotes.push(newQuote);
-  // Then send back a 201 status
-  response.status(201).json(newQuote);
-  // And also send the new quote as JSON in the response
-});
-app.get('/quotes/:name', (request, response) => {
-    const { name } = request.params;
-    const matchedQuote = quotes.find((quote) => name === quote.name);
+app
+    .route('/quotes')
+    .get((request, response) => {
+        response.send(quotes);
+    })
+    .post(bodyParser.json(), (request, response) => {
+        const newQuote = request.body;
+        // Add your new quote to the quotes array
+        quotes.push(newQuote);
+        // Then send back a 201 status
+        // And also send the new quote as JSON in the response
+        response.status(201).json(newQuote);
+    });
 
-    if (!matchedQuote) {
-        response.status(404).json('That person isn\'t quote-worthy.');
-    } else {
-        response.json(matchedQuote.text);
-    }
-});
-qpp.delete('/quotes/:name', (request, response) => {
-    const { name } = request.params;
+app
+    .route('/quotes/:name')
+    .get((request, response) => {
+        const { name } = request.params;
+        const matchedQuote = quotes.find((quote) => name === quote.name);
 
-    quotes = quotes.filter( (quote) => quote.name !== name);
-
-    response.status(200).json(quotes);
-});
+        if (!matchedQuote) {
+            response.status(404).json('That person isn\'t quote-worthy.');
+        } else {
+            response.json(matchedQuote.text);
+        }
+    })
+    .delete((request, response) => {
+        // Retrieve the name from the request
+        const { name } = request.params;
+        // Remove the quote from the quotes array
+        quotes = quotes.filter((quote) => quote.name !== name);
+        // Send back the 200 status with the response
+        response.status(200).json(quotes);
+    });
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
-})
+});
