@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3300;
-const quotes = [
+let quotes = [
     {
         name: 'Fred Brooks',
         text: 'Nine people can’t make a baby in a month.',
@@ -57,6 +57,13 @@ app.get('/quotes/:name', (request, response) => {
     } else {
         response.json(matchedQuote.text);
     }
+});
+qpp.delete('/quotes/:name', (request, response) => {
+    const { name } = request.params;
+
+    quotes = quotes.filter( (quote) => quote.name !== name);
+
+    response.status(200).json(quotes);
 });
 
 app.listen(PORT, () => {
