@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3300;
 const quotes = [
@@ -39,6 +40,14 @@ app.use(express.static('public'));
 app.get('/quotes', (request, response) => {
     response.send(quotes);
 });
+app.post('/quotes', bodyParser.json(), (request, response) => {
+  const newQuote = request.body;
+  // Add your new quote to the quotes array
+  quotes.push(newQuote);
+  // Then send back a 201 status
+  response.status(201).json(newQuote);
+  // And also send the new quote as JSON in the response
+});
 app.get('/quotes/:name', (request, response) => {
     const { name } = request.params;
     const matchedQuote = quotes.find((quote) => name === quote.name);
@@ -49,6 +58,7 @@ app.get('/quotes/:name', (request, response) => {
         response.json(matchedQuote.text);
     }
 });
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 })

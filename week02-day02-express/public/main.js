@@ -1,31 +1,56 @@
 console.log('in main.js');
 
-function appendQuotes(quotes) {
+function appendQuote(quote) {
     const quotesListElement = document.getElementById('quotes-list');
+    const quoteHtml = `
+        <li>
+            <strong>${quote.name}</strong>: ${quote.text}
+        </li>
+    `;
 
-    quotes.forEach((quote) => {
-        const quoteHtml = `
-            <li>
-                <strong>${quote.name}</strong>: ${quote.text}
-            </li>
-        `;
-
-        quotesListElement.innerHTML += quoteHtml;
-    });
+    quotesListElement.innerHTML += quoteHtml;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const quotesButtonElement = document.getElementById('quotes');
+    const getQuotesButtonElement = document.getElementById('get-quotes');
+    const createQuoteFormElement = document.getElementById('create-quote');
 
-    quotesButtonElement.addEventListener('click', () => {
-        const quotesUrl = '/quotes';
-
-        fetch(quotesUrl).then(
+    getQuotesButtonElement.addEventListener('click', () => {
+        fetch('/quotes').then(
             (response) => response.json()
         ).then((quotes) => {
             console.log('quotes:', quotes);
-            appendQuotes(quotes);
+            quotes.map(appendQuote);
         });
+    });
+    createQuoteFormElement.addEventListener('submit', (event) => {
+        console.log('create quote: event:', event);
+        const name = event.target.name.value;
+        const text = event.target.text.value;
+        const newQuote = { name, text };
+        event.preventDefault();
+        console.log('newQuote:', newQuote);
+
+        fetch(
+            '/quotes',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                },
+                body: JSON.stringify(newQuote),
+            }
+        ).then(
+            (response) => response.json()
+        ).then(
+            (quote) => {
+                appendQuote(quote);
+                event.target.name.value = '';
+                event.target.text.value = '';
+            }
+        ).catch(
+            error => console.error(`Fetch Error =\n`, error)
+        );
     });
 });
 
