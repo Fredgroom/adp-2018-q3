@@ -5,6 +5,24 @@ const port = 3300;
 //   response.send('Hello, world!');
 // });
 
+function diyLogger(request, response, next) {
+  const startDate = new Date();
+  const startTime = startDate.getTime();
+  const { url, method } = request;
+  const { statusCode } = response;
+
+  response.on('finish', () => {
+      const finishDate = new Date();
+      const finishTime = finishDate.getTime();
+      const timeDelta = finishTime - startTime;
+
+      console.log(`${method} ${url} ${statusCode} ${timeDelta}ms`);
+  });
+  next();
+}
+
+app.use(diyLogger);
+
 const quotes = [
   {
     name: 'Fred Brooks',
