@@ -22,15 +22,16 @@ const typeDefs = gql`
         movies(ids: [ID]): [Movie]
         movie(id: ID!): Movie
     }
+    input PersonInput {
+        name: String!
+        birthday: String
+        placeOfBirth: String
+        bio: String
+        filmography: [ID]
+    }
     type Mutation {
-        addPerson(
-            name: String!
-            birthday: String
-            placeOfBirth: String
-            bio: String
-            filmography: [ID]
-        ): Person
-  }
+        addPerson(person: PersonInput!): Person
+    }
 `;
 
 module.exports = typeDefs;
