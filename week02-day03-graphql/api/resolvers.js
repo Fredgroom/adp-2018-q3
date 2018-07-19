@@ -1,17 +1,25 @@
 const { data } = require('./data');
 const resolvers = {
     Query: {
-        people() {
-            return data.people;
-        },
+        people: () => data.people,
         person(root, { id }) {
-            return data.movie.find((person) => person.id === parseInt(id));
+            return data.people.find((person) => person.id === parseInt(id));
         },
-        movies() {
+        movies(root, { ids }) {
+            if (ids) {
+                return data.movies.filter((movie) => ids.includes(movie.id.toString()));
+            }
             return data.movies;
         },
         movie(root, { id }) {
             return data.movies.find((movie) => movie.id === parseInt(id));
+        }
+    },
+    Person: {
+        filmography(person) {
+            return data.movies.filter(movie => person.filmography.find(credit => (
+                credit === movie.id
+            )));
         }
     },
     Movie: {

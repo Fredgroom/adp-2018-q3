@@ -1,4 +1,5 @@
 const { gql } = require('apollo-server-express');
+
 const typeDefs = gql`
     type Person {
         id: ID!
@@ -18,7 +19,7 @@ const typeDefs = gql`
     type Query {
         people: [Person]
         person(id: ID!): Person
-        movies: [Movie]
+        movies(ids: [ID]): [Movie]
         movie(id: ID!): Movie
     }
 `;
