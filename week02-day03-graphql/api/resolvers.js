@@ -36,7 +36,22 @@ const resolvers = {
             };
             return data.people.find((person) => person.id === movie.director);
         }
-    }
+    },
+    Mutation: {
+        addPerson(root, { name, birthday, placeOfBirth, bio, filmography}) {
+            const id = data.people.length + 1;
+            const newPerson = {
+            id,
+            name,
+            birthday,
+            placeOfBirth,
+            bio,
+            filmography
+          }
+          data.people.push(newPerson);
+          return newPerson;
+        }
+      }
 };
 
 module.exports = resolvers;
