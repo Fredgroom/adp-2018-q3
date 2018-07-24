@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const ToDo = ({ ordinal, todo }) => {
     return <li>
     {ordinal}. {todo.title}
-    <input type="checkbox" id={todo.id} checked={todo.complete} />
+    <input type="checkbox" id={todo.id} checked={todo.complete} onClick="toggleComplete"/>
     <label htmlFor={todo.id} />
     <button>
       <i className="fa fa-trash" />
@@ -18,5 +18,6 @@ ToDo.proptypes = {
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         complete: PropTypes.bool.isRequired
-    })
+    }),
+    toggleComplete: PropTypes.func.isRequired
 };

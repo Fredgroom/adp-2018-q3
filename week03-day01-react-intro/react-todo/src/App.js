@@ -20,6 +20,17 @@ class App extends Component {
   }
 
 
+  toggleComplete(item) {
+    const todos = this.state.todos.map((todo) => {
+    if (todo.id === item.id) {
+      todo.complete = !todo.complete;
+    }
+  return todo;
+    });
+
+  this.setState({ todos});
+  }
+  
   render() {
 
     return <div>
@@ -28,14 +39,14 @@ class App extends Component {
         <h1>So Much To Do</h1>
         <ul>
           {this.state.todos.map((todo, index) =>
-            <ToDo key={todo.id} todo={todo} ordinal={index + 1}></ToDo>
+            <ToDo key={todo.id} todo={todo} ordinal={index + 1} toggleComplete={() => this.toggleComplete(todo)}></ToDo>
           )}
 
         </ul>
 
         <div className="todo-admin">
           <ToDoCount number={this.state.todos.length} />
-          <ClearButton buttonText=""></ClearButton>
+          <ClearButton removeCompleted=""></ClearButton>
 
         </div>
 
