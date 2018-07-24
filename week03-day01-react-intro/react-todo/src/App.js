@@ -6,31 +6,37 @@ import { ToDoCount } from './components/ToDoCount';
 import { ClearButton } from './components/ClearButton';
 
 
-
-
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      todos: [
+        { id: 0, title: 'Learn React', complete: false },
+        { id: 1, title: 'Learn Redux', complete: false },
+        { id: 2, title: 'Learn SQL', complete: false }
+      ],
+      lastID: 0
+    };
+  }
+
+
   render() {
 
-    const todos = [
-      { id: 0, title: 'Learn React', complete: false },
-      { id: 1, title: 'Learn Redux', complete: false },
-      { id: 2, title: 'Learn SQL', complete: false }
-    ];
-
     return <div>
-      <h1>So Much To Do</h1>
+
       <div className="todo-list">
+        <h1>So Much To Do</h1>
         <ul>
-          {todos.map((todo, index) =>
+          {this.state.todos.map((todo, index) =>
             <ToDo key={todo.id} todo={todo} ordinal={index + 1}></ToDo>
           )}
 
         </ul>
 
         <div className="todo-admin">
-          <ToDoCount number={todos.length} />
+          <ToDoCount number={this.state.todos.length} />
           <ClearButton buttonText=""></ClearButton>
-          
+
         </div>
 
       </div>
