@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const ToDo = ({ ordinal, todo }) => {
-    return <li>{ordinal}. {todo.title}</li>;
+    return <li>
+    {ordinal}. {todo.title}
+    <input type="checkbox" id={todo.id} checked={todo.complete} />
+    <label htmlFor={todo.id} />
+    <button>
+      <i className="fa fa-trash" />
+    </button>
+  </li>
 }
 
 ToDo.proptypes = {
