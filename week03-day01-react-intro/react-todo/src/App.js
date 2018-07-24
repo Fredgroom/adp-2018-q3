@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
 
-const ToDo = ({ number, todo }) => {
-  return <li>{number}. {todo}</li>;
-}
+import './App.css';
+import { ToDo } from './components/ToDo';
+import { ToDoCount } from './components/ToDoCount';
+import { ClearButton } from './components/ClearButton';
+
+
+
 
 class App extends Component {
   render() {
@@ -19,8 +22,17 @@ class App extends Component {
       <div className="todo-list">
         <ul>
           {todos.map((todo, index) =>
-            <ToDo key={todo.id} todo={todo.title} number={index + 1}></ToDo>)}
+            <ToDo key={todo.id} todo={todo} ordinal={index + 1}></ToDo>
+          )}
+
         </ul>
+
+        <div className="todo-admin">
+          <ToDoCount number={todos.length} />
+          <ClearButton buttonText=""></ClearButton>
+          
+        </div>
+
       </div>
     </div>;
 
