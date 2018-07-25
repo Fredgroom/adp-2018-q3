@@ -15,6 +15,11 @@ class App extends Component {
       ],
       lastId: 0
     };
+    this.toDoInput = React.createRef();
+  }
+
+  componentDidMount() {
+    this.toDoInput.current.focus();
   }
 
   toggleComplete(item) {
@@ -43,15 +48,38 @@ class App extends Component {
   hasCompleted() {
     const completedTodos = this.state.todos.filter((todo) => todo.complete);
 
-    
+
     return completedTodos.length > 0;
   }
+
+  addToDo(event) {
+    event.preventDefault();
+    let toDoInput = this.toDoInput.current;
+    if (toDoInput) {
+      const id = this.state.lastId + 1; // update id
+      const newTodos = [
+        ...this.state.todos,
+        { id, title: toDoInput.value, complete: false }
+      ];
+      this.setState({
+        todos: newTodos,
+        lastId: id
+      });
+      toDoInput.value = "";
+    }
+  };
 
   render() {
     return (
       <div>
         <div className="todo-list">
           <h1>So much to do</h1>
+          <div className="add-todo">
+            <form name="addTodo" onSubmit={this.addToDo.bind(this)}>
+              <input type="text" ref={this.toDoInput} />
+              <span>(press enter to add)</span>
+            </form>
+          </div>
           <ul>
             {this.state.todos.map((todo, index) =>
               <ToDo
