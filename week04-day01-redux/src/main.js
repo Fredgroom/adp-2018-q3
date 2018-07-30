@@ -1,10 +1,8 @@
 import store from './redux/store'
 import {incrementCounter, decrementCounter} from './redux/modules/counter'
-//ACTIONS
-// ----------
-//1. action for increment: INCREMENT_COUNTER
-//2. action for decrement: DECREMENT_COUNTER
+import {updateCountName} from './redux/modules/name'
 
+//---------------------------
 
 document.getElementById('increment').addEventListener('click', () => {
     store.dispatch(incrementCounter())
@@ -16,7 +14,18 @@ document.getElementById('decrement').addEventListener('click', () => {
     document.getElementById('count').innerHTML = store.getState().counter.count; 
 });
 
+//----------------------------
+const nameInputField = document.getElementById("name")
+const nameOutputField = document.getElementById("counted-name")
+
+nameInputField.addEventListener("input", () => {
+    store.dispatch(updateCountName(nameInputField.value))
+    nameOutputField.textContent = store.getState().name.name
+});
+
+
 let unsubscribe = store.subscribe(() => {
+    count.textContent = store.getState().counter.count
     console.log('something changed in the store');
     console.log(store.getState().counter)
     })
@@ -24,4 +33,6 @@ let unsubscribe = store.subscribe(() => {
 store.dispatch(incrementCounter())
 store.dispatch(decrementCounter())
 
+
 unsubscribe(); 
+
