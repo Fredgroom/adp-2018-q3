@@ -11,13 +11,10 @@ document.getElementById('increment').addEventListener('click', () => {
     document.getElementById('count').innerHTML = store.getState().counter.count; 
 });
 
-
 document.getElementById('decrement').addEventListener('click', () => {
     store.dispatch(decrementCounter())
     document.getElementById('count').innerHTML = store.getState().counter.count; 
 });
-
-
 
 let unsubscribe = store.subscribe(() => {
     console.log('something changed in the store');
@@ -27,4 +24,4 @@ let unsubscribe = store.subscribe(() => {
 store.dispatch(incrementCounter())
 store.dispatch(decrementCounter())
 
-unsubscribe();
+unsubscribe(); 
