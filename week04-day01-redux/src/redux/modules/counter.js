@@ -1,5 +1,13 @@
 //all teh stuff to do with counting
 
+export const incrementCounter = () => {
+    return { type: 'INCREMENT_COUNTER'}
+}
+
+export const decrementCounter = () => {
+    return { type: 'DECREMENT_COUNTER'}
+}
+
 export default (state = {count: 0} , action) => {
 
     switch (action.type) {

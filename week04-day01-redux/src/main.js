@@ -1,5 +1,5 @@
 import store from './redux/store'
-
+import {incrementCounter, decrementCounter} from './redux/modules/counter'
 //ACTIONS
 // ----------
 //1. action for increment: INCREMENT_COUNTER
@@ -7,16 +7,10 @@ import store from './redux/store'
 
 console.log(store.getState().counter)
 
-const incrementCount = () => {
-    return { type: 'INCREMENT_COUNTER'}
-}
 
-const decrementCount = () => {
-    return { type: 'DECREMENT_COUNTER'}
-}
 
-store.dispatch(incrementCount())
+store.dispatch(incrementCounter())
 console.log(store.getState().counter);
 
-store.dispatch(decrementCount())
+store.dispatch(decrementCounter())
 console.log(store.getState().counter);
