@@ -7,8 +7,16 @@ import store from './redux/store'
 
 console.log(store.getState().counter)
 
-store.dispatch({ type: 'INCREMENT_COUNTER' })
+const incrementCount = () => {
+    return { type: 'INCREMENT_COUNTER'}
+}
+
+const decrementCount = () => {
+    return { type: 'DECREMENT_COUNTER'}
+}
+
+store.dispatch(incrementCount())
 console.log(store.getState().counter);
 
-store.dispatch({ type: 'DECREMENT_COUNTER'})
+store.dispatch(decrementCount())
 console.log(store.getState().counter);
