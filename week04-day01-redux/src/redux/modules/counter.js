@@ -11,6 +11,8 @@ export const decrementCounter = () => {
     return { type: DECREMENT_COUNTER}
 }
 
+//--------------------------------------------
+
 export default (state = {count: 0} , action) => {
 
     switch (action.type) {
