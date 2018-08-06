@@ -36,14 +36,3 @@ app.listen(3002, (err) => console.log('Express started.'))
 
 
 
-Collapse 
-Message Input
-
-
-Message #ldn-adpp-q3-2018
-
-About
-#ldn-adpp-q3-2018
-
-
-Channel Details
