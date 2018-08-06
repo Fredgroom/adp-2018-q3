@@ -24,3 +24,19 @@ Template.hello.events({
     instance.counter.set(instance.counter.get() - 1);
   },
 });
+
+Template.blah.onCreated(function blahOnCreated() {
+  this.userText = new ReactiveVar('');
+});
+
+Template.blah.helpers({
+  userText() {
+    return Template.instance().userText.get();
+  }
+});
+
+Template.blah.events({
+  'click button'(event, instance){
+      instance.userText.set($('input').val());
+  },
+});
