@@ -48,4 +48,9 @@ describe('firstUniqueCharacter', () => {
             expect(firstUniqueCharacter('abcdefg')).toEqual('a');
         })
     });
+    describe('when string has different letters, all repeating', () => {
+        it('should return undefined', () => {
+            expect(firstUniqueCharacter('aaaaaaabbbbbbbddddddd')).not.tobedefined;
+        })
+    })
 });
