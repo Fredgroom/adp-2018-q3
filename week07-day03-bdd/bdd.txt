@@ -1,0 +1,25 @@
+Title:
+    
+
+Narrative:
+
+
+Scenario:
+
+Given the dataset that has been given
+
+When the database is called
+    and the user is logged in
+    and the user is a teacher
+    and there is data to read
+
+Then return information about the students
+    and can be refined to individual students
+    and can be refined to students Names
+    and can be refined to students ages
+    and can be refined to students yearsExperience
+    and can be refined to students satisfaction
+    and can be refined to students project 1 grade
+    and can be refined to students project 2 grade
+    and can be refined to students project 3 grade
+    and can be refined to students project 4 grade

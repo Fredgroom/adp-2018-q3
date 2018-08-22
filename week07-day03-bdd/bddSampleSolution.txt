@@ -1,0 +1,50 @@
+Title:
+An instructor evaluates the derived satisfaction of a lesson
+
+Narrative:
+As an instructor
+I want to know how the project I've chosen affect the satisfaction of my students
+So that I can challenge them while making them happy
+
+Scenario:
+Given I have loaded the student data
+When I query a project by name
+Then I should be given data on:
+    How many students passed the project
+    The satisfaction level of the students who passed the project
+    The satisfaction level of the students who failed the project
+
+--------------------------------------------------------------------------------
+Title:
+An instructor determines the effects of prior experience on satisfaction
+
+Narrative:
+As an instructor
+I want to know how the prior experience a student has had affects their satisfaction
+So that I can adjust the course prerequisites.
+
+Scenario:
+Given I have loaded the student data
+When I query a range of experience
+And students with that amount of experience exist
+Then I should be provided with average satisfaction for that level of experience
+Given I have loaded the student data
+When I query an amount of experience
+And students with that amount of experience do not exist
+Then I should not be provided with any data
+
+--------------------------------------------------------------------------------
+
+Title:
+A marketer wants to know the demographics of a given cohort
+
+Narrative:
+As a marketer
+I want insight into the types of people taking a course
+So that I can market to their peers using targeted advertising
+
+Scenario:
+Given I've loaded the student data
+When I query a cohort
+Then I should be able to get the average age of the students
+And I should be able to get the average amount of experience the students have
