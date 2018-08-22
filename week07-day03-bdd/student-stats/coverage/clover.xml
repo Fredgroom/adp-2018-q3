@@ -1,7 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1534936774492" clover="3.2.0">
-  <project timestamp="1534936774492" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0">
+<coverage generated="1534947986569" clover="3.2.0">
+  <project timestamp="1534947986569" name="All files">
+    <metrics statements="34" coveredstatements="34" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="8" elements="48" coveredelements="48" complexity="0" loc="34" ncloc="34" packages="1" files="2" classes="2">
+      <file name="process-data.js" path="/Users/freddiegroom/Documents/Programming/RedAcademy/AppDev/adp-2018-q3/week07-day03-bdd/student-stats/src/process-data.js">
+        <metrics statements="28" coveredstatements="28" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="17" count="16" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="28" count="16" type="stmt"/>
+        <line num="33" count="16" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
+        <line num="43" count="4" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="45" count="8" type="stmt"/>
+        <line num="48" count="8" type="stmt"/>
+        <line num="49" count="32" type="stmt"/>
+        <line num="51" count="32" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="16" type="stmt"/>
+        <line num="55" count="32" type="stmt"/>
+        <line num="57" count="32" type="cond" truecount="2" falsecount="0"/>
+        <line num="58" count="12" type="stmt"/>
+        <line num="59" count="12" type="stmt"/>
+        <line num="61" count="20" type="stmt"/>
+        <line num="62" count="20" type="stmt"/>
+        <line num="67" count="4" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+      </file>
+      <file name="student-stats.js" path="/Users/freddiegroom/Documents/Programming/RedAcademy/AppDev/adp-2018-q3/week07-day03-bdd/student-stats/src/student-stats.js">
+        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="9" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+      </file>
     </metrics>
   </project>
 </coverage>
