@@ -14,4 +14,4 @@ class StudentStats {
     }
 }
 
-module.exports = StudentStats;
+module.exports = StudentStats; 
