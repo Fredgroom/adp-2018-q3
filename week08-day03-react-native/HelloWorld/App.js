@@ -7,33 +7,37 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Dimensions, View, FlatList, Text, ActivityIndicator } from 'react-native';
+import { Platform, StyleSheet, Dimensions, View, FlatList, SectionList, Text, ActivityIndicator } from 'react-native';
 
 
 type Props = {};
 export default class App extends Component<Props> {
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       data: ['Thing 1', 'Thing 2'],
-      isLoading: true, 
+      isLoading: true,
     };
   }
   render() {
-    if (true) {
-     return (
-      <ActivityIndicator animating={true} size="small" color="black" />
-     );
+    if (this.state.isLoading) {
+      return (
+        <ActivityIndicator animating={true} size="small" color="black" />
+      );
     } else {
-     return (
-      <FlatList
-       data={this.state.data}
-       renderItem={({ item }) => <View><Text>{item.name}</Text></View>}
-       keyExtractor={item => item.id.toString()}
-      />
-     );
+      return (
+        <SectionList
+          sections={[
+            { title: "ADP", data: ["Bob", "Alice"] },
+            { title: "WDP", data: ["Anne", "Mary", "Joe"] }
+          ]}
+          renderItem={({ item }) => <Text>{item}</Text>}
+          renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
+          keyExtractor={(item, index) => index}
+        />
+      );
     }
-   }
+  }
   componentDidMount() {
     let endpoint = 'https://api.github.com/users/octocat/repos';
     fetch(endpoint)
@@ -45,7 +49,7 @@ export default class App extends Component<Props> {
       .catch(error => console.log(`Error fetching JSON: ${error}`));
   }
   componentDidUpdate() {
-    if ( this.state.data && this.state.isLoading ) {
+    if (this.state.data && this.state.isLoading) {
       this.setState({ isLoading: false });
     }
   }
