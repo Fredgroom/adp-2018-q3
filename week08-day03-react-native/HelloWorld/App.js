@@ -20,7 +20,7 @@ export default class App extends Component<Props> {
     };
   }
   render() {
-    if (this.state.isLoading) {
+    if (true) {
      return (
       <ActivityIndicator animating={true} size="small" color="black" />
      );
