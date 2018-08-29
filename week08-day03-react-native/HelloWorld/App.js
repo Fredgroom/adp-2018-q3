@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { Platform, StyleSheet, Dimensions, View } from 'react-native';
 
 const instructions = Platform.select({
   ios: 'LinkedIn: Freddie-Groom\n' +
@@ -21,39 +21,39 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Hello World!</Text>
-        <Text style={styles.instructions}>@GreddieFroom</Text>
-        <Text style={styles.instructions}></Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <View style={{backgroundColor: "#53290B"}}>
-        <Button
-          title="Learn More"
-          color="white"
-          accessibilityLabel="Learn more about this disgustingly coloured button"
-        />
-        </View>
+      <View style={[styles.container]}>
+        <View style={[styles.box, styles.box1]} />
+        <View style={[styles.box, styles.box2]} />
+        <View style={[styles.box, styles.box3]} />
+        <View style={[styles.box, styles.box4]} />
       </View>
     );
   }
 }
 
+var { height, width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 40,
-    textAlign: 'center',
-    margin: 10,
+  box: {
+    width: width / 2,
+    height: height / 2,
   },
-  instructions: {
-    fontSize: 25,
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  box1: {
+    backgroundColor: 'powderblue',
+  },
+  box2: {
+    backgroundColor: 'skyblue',
+  },
+  box3: {
+    backgroundColor: 'steelblue',
+  },
+  box4: {
+    backgroundColor: 'midnightblue',
   },
 });
