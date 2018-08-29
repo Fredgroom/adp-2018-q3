@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Dimensions, View } from 'react-native';
+import { Platform, StyleSheet, Dimensions, View, FlatList, Text } from 'react-native';
 
 const instructions = Platform.select({
   ios: 'LinkedIn: Freddie-Groom\n' +
@@ -19,17 +19,20 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor() {
+    super();
+    this.state = { data: ['Thing 1', 'Thing 2'] };
+  }
   render() {
     return (
-      <View style={[styles.container]}>
-        <View style={[styles.box, styles.box1]} />
-        <View style={[styles.box, styles.box2]} />
-        <View style={[styles.box, styles.box3]} />
-        <View style={[styles.box, styles.box4]} />
-      </View>
+      <FlatList
+        data={this.state.data}
+        renderItem={({ item }) => <View><Text>{item}</Text></View>}
+        keyExtractor={(item, index) => index}
+      />
     );
-  }
-}
+  };
+};
 
 var { height, width } = Dimensions.get('window');
 
