@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Dimensions, View, FlatList, SectionList, Text, ActivityIndicator } from 'react-native';
+import { Platform, StyleSheet, Dimensions, View, FlatList, SectionList, Text, ActivityIndicator, Image } from 'react-native';
 
 
 type Props = {};
@@ -26,20 +26,24 @@ export default class App extends Component<Props> {
       );
     } else {
       return (
-        <SectionList
-          sections={[
-            { title: "ADP", data: ["Bob", "Alice"] },
-            { title: "WDP", data: ["Anne", "Mary", "Joe"] }
-          ]}
-          renderItem={({ item }) => <Text>{item}</Text>}
-          renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
-          keyExtractor={(item, index) => index}
+        <FlatList
+          style={styles.container}
+          data={this.state.data}
+          renderItem={({ item }) =>
+            <View style={styles.row}>
+              <Image
+                style={styles.avatar}
+                source={{ uri: item.avatar }}
+              />
+              <Text style={styles.name}>{item.first_name} {item.last_name}</Text>
+            </View>}
+          keyExtractor={item => item.id.toString()}
         />
       );
     }
   }
   componentDidMount() {
-    let endpoint = 'https://api.github.com/users/octocat/repos';
+    let endpoint = 'https://robot-data.firebaseio.com/robots.json';
     fetch(endpoint)
       // if fetch is successful, read our JSON out of the response
       .then(response => response.json())
@@ -60,24 +64,20 @@ var { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  row: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    backgroundColor: '#F5FCFF',
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1,
+    height: height / 11,
+    alignItems: 'center',
   },
-  box: {
-    width: width / 2,
-    height: height / 2,
+  name: {
+    paddingLeft: 2,
   },
-  box1: {
-    backgroundColor: 'powderblue',
-  },
-  box2: {
-    backgroundColor: 'skyblue',
-  },
-  box3: {
-    backgroundColor: 'steelblue',
-  },
-  box4: {
-    backgroundColor: 'midnightblue',
-  },
+  avatar: {
+    width: 30,
+    height: 30,
+    margin: 10,
+  }
 });
